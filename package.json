@@ -1,0 +1,27 @@
+{
+  "name": "vue-popup",
+  "version": "0.0.0",
+  "description": "A popup mixin for vue.js",
+  "private": false,
+  "keywords": [
+  ],
+  "scripts": {
+    "dev": "cooking watch",
+    "dist": "cooking build -p",
+    "deploy": "cooking build --no-color"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:ElemeFE/vue-popup.git/vue-popup.git"
+  },
+  "homepage": "git@github.com:ElemeFE/vue-popup.git/vue-popup#readme",
+  "bugs": {
+    "url": "git@github.com:ElemeFE/vue-popup.git/vue-popup/issues"
+  },
+  "author": "yi.shyang@ele.me",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
