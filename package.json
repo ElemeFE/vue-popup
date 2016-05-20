@@ -1,10 +1,9 @@
 {
   "name": "vue-popup",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A popup mixin for vue.js",
   "private": false,
-  "keywords": [
-  ],
+  "keywords": [],
   "scripts": {
     "dev": "cooking watch",
     "dist": "cooking build -p",
@@ -20,8 +19,6 @@
   },
   "author": "yi.shyang@ele.me",
   "license": "MIT",
-  "dependencies": {
-  },
-  "devDependencies": {
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
