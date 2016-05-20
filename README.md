@@ -22,6 +22,7 @@ Then `vue-popup`'s APIs(see below) are accessible via the vue instance's `props`
 
 # Example
 Goal: on your page you have a button. When it's clicked, an alert pops up.
+
 First let's deal with the alert component in `alert.vue`:
 ```html
 <template>
@@ -54,6 +55,7 @@ First let's deal with the alert component in `alert.vue`:
 </script>
 ```
 As you can see, `v-if="rendered"` and `v-show="visible"` should be added on the outermost tag of the component. Its `props` attribute has two keys: `modal` and `closeOnClickModal`, please refer to API below for detailed information.
+
 That's it for the alert component. Let's move on to the main page:
 ```html
 <template>
