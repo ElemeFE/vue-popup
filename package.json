@@ -1,6 +1,6 @@
 {
   "name": "vue-popup",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A popup mixin for vue.js",
   "private": false,
   "keywords": [],
