@@ -122,9 +122,11 @@ const PopupManager = {
     if (modalStack.length === 0) {
       modalDom.classList.add('modal-leave');
       setTimeout(() => {
+        if (modalStack.length === 0) {
+          if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
+          modalDom.style.display = 'none';
+        }
         modalDom.classList.remove('modal-leave');
-        if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
-        modalDom.style.display = 'none';
       }, 200);
     }
   }

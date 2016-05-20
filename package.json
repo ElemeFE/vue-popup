@@ -4,6 +4,7 @@
   "description": "A popup mixin for vue.js",
   "private": false,
   "keywords": [],
+  "main": "lib/index.js",
   "scripts": {
     "dev": "cooking watch",
     "dist": "cooking build -p",
