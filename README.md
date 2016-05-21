@@ -40,7 +40,7 @@ First let's deal with the alert component in `alert.vue`:
 </style>
 <script>
   import Popup from 'vue-popup';
-  require('vue-popup/lib/vue-popup.css');
+  require('vue-popup/lib/popup.css');
   export default {
       mixins: [Popup],
       props: {
