@@ -3,7 +3,7 @@
 }
 
 .v-modal-leave {
-  animation: v-modal-out .2s ease;
+  animation: v-modal-out .2s ease forwards;
 }
 
 @keyframes v-modal-in {
