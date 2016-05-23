@@ -70,13 +70,13 @@ const PopupManager = {
     const modalDom = getModal();
 
     modalDom.classList.add('v-modal');
-    modalDom.classList.add('modal-enter');
+    modalDom.classList.add('v-modal-enter');
     if (modalClass) {
       let classArr = modalClass.trim().split(/\s+/);
       classArr.forEach(item => modalDom.classList.add(item));
     }
     setTimeout(() => {
-      modalDom.classList.remove('modal-enter');
+      modalDom.classList.remove('v-modal-enter');
     }, 200);
 
     if (dom && dom.parentNode && dom.parentNode.nodeType !== 11) {
@@ -120,13 +120,13 @@ const PopupManager = {
     }
 
     if (modalStack.length === 0) {
-      modalDom.classList.add('modal-leave');
+      modalDom.classList.add('v-modal-leave');
       setTimeout(() => {
         if (modalStack.length === 0) {
           if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
           modalDom.style.display = 'none';
         }
-        modalDom.classList.remove('modal-leave');
+        modalDom.classList.remove('v-modal-leave');
       }, 200);
     }
   }
