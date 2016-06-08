@@ -30,4 +30,5 @@
   height: 100%;
   opacity: 0.5;
   background: #000;
+  backface-visibility: hidden;
 }

@@ -19,5 +19,6 @@ cooking.set({
 });
 
 cooking.add('externals.vue', 'vue');
+cooking.remove('plugin.UglifyJs');
 
 module.exports = cooking.resolve();
