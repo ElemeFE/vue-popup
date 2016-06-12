@@ -1,6 +1,6 @@
 {
   "name": "vue-popup",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A popup mixin for vue.js",
   "private": false,
   "keywords": [],
@@ -19,7 +19,7 @@
   "bugs": {
     "url": "git@github.com:ElemeFE/vue-popup.git/vue-popup/issues"
   },
-  "author": "yi.shyang@ele.me",
+  "author": "baiyaaaaa",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {}
