@@ -9,7 +9,8 @@
     "dev": "cooking watch",
     "dist": "cooking build -p",
     "prepublish": "cooking build --no-color",
-    "deploy": "cooking build --no-color"
+    "deploy": "cooking build --no-color",
+    "page": "cooking build -c cooking.example.conf.js -p && gh-pages -d example/dist --remote origin"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "author": "baiyaaaaa",
   "license": "MIT",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "gh-pages": "^0.11.0",
+    "my-local-ip": "^1.0.0"
+  }
 }

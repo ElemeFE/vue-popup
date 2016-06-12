@@ -2,12 +2,10 @@
   <div class="dialog"
     v-if="rendered"
     v-show="visible"
-    transition="dialog-fade"
-    :class="{ showclose: showClose }">
+    transition="dialog-fade">
     <div class="dialog-content">
       <slot></slot>
     </div>
-    <div class="dialog-close" @click="close()" v-if="showClose"></div>
   </div>
 </template>
 
@@ -25,22 +23,6 @@
     border-radius: 8px;
     padding: 20px;
     text-align: center;
-  }
-
-  .dialog.showclose {
-    padding-bottom: 40px;
-  }
-
-  .dialog-close {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -5px;
-    height: 35px;
-    width: 35px;
-    line-height: 35px;
-    text-align: center;
-    background-size: cover;
   }
 
   .dialog-fade-transition {

@@ -7,9 +7,14 @@ cooking.set({
   dist: './example/dist',
   use: 'vue',
   publicPath: '/example/dist/',
-  template: false,
+  template: './example/index.html',
 
-  devServer: false,
+  devServer: {
+    port: 8700,
+    hostname: require('my-local-ip')(),
+    publicPath: '/',
+    log: false
+  },
 
   extends: ['vue', 'lint']
 });
