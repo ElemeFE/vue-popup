@@ -94,6 +94,7 @@ export default {
 
   data() {
     return {
+      bodyOverflow: null,
       rendered: false
     };
   },
@@ -159,6 +160,10 @@ export default {
           this._closing = false;
         }
         PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), dom, props.modalClass);
+        if (!this.bodyOverflow) {
+          this.bodyOverflow = document.body.style.overflow;
+        }
+        document.body.style.overflow = 'hidden';
       }
 
       if (getComputedStyle(dom).position === 'static') {
@@ -209,6 +214,10 @@ export default {
       this._closing = true;
 
       this.onClose && this.onClose();
+
+      if (this.modal) {
+        document.body.style.overflow = this.bodyOverflow;
+      }
 
       if (!this.transition) {
         this.doAfterClose();
