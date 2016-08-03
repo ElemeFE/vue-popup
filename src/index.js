@@ -154,6 +154,12 @@ export default {
       const dom = getDOM(this.$el);
 
       const modal = props.modal;
+
+      const zIndex = props.zIndex;
+      if (zIndex) {
+        PopupManager.zIndex = zIndex;
+      }
+
       if (modal) {
         if (this._closing) {
           PopupManager.closeModal(this._popupId);
@@ -170,7 +176,6 @@ export default {
         dom.style.position = 'absolute';
       }
 
-      const zIndex = props.zIndex;
       if (modal) {
         dom.style.zIndex = PopupManager.nextZIndex();
       } else if (zIndex) {
