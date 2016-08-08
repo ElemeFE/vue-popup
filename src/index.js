@@ -48,7 +48,7 @@ const getDOM = function(dom) {
 
 export default {
   props: {
-    visible: {
+    value: {
       type: Boolean,
       default: false
     },
@@ -93,18 +93,13 @@ export default {
 
   data() {
     return {
-      computedVisible: false,
       bodyOverflow: null,
       rendered: false
     };
   },
 
   watch: {
-    visible(val) {
-      this.computedVisible = val;
-    },
-
-    computedVisible(val) {
+    value(val) {
       if (val) {
         if (this._opening) return;
         if (!this.rendered) {
@@ -125,7 +120,7 @@ export default {
     open(options) {
       if (!this.rendered) {
         this.rendered = true;
-        this.computedVisible = true;
+        this.$emit('input', true);
 
         return;
       }
@@ -153,7 +148,7 @@ export default {
       if (this.willOpen && !this.willOpen()) return;
 
       this._opening = true;
-      this.computedVisible = true;
+      this.$emit('input', true);
 
       const dom = getDOM(this.$el);
 
@@ -219,7 +214,7 @@ export default {
     },
 
     doClose() {
-      this.computedVisible = false;
+      this.$emit('input', false);
       this._closing = true;
 
       this.onClose && this.onClose();
