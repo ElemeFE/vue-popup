@@ -50,7 +50,6 @@ export default {
   props: {
     visible: {
       type: Boolean,
-      twoWay: true,
       default: false
     },
     transition: {
@@ -82,7 +81,7 @@ export default {
     }
   },
 
-  compiled() {
+  beforeMount() {
     this._popupId = 'popup-' + idSeed++;
     PopupManager.register(this._popupId, this);
   },
@@ -94,6 +93,7 @@ export default {
 
   data() {
     return {
+      computedVisible: false,
       bodyOverflow: null,
       rendered: false
     };
@@ -101,6 +101,10 @@ export default {
 
   watch: {
     visible(val) {
+      this.computedVisible = val;
+    },
+
+    computedVisible(val) {
       if (val) {
         if (this._opening) return;
         if (!this.rendered) {
@@ -121,7 +125,7 @@ export default {
     open(options) {
       if (!this.rendered) {
         this.rendered = true;
-        this.visible = true;
+        this.computedVisible = true;
 
         return;
       }
@@ -149,7 +153,7 @@ export default {
       if (this.willOpen && !this.willOpen()) return;
 
       this._opening = true;
-      this.visible = true;
+      this.computedVisible = true;
 
       const dom = getDOM(this.$el);
 
@@ -215,7 +219,7 @@ export default {
     },
 
     doClose() {
-      this.visible = false;
+      this.computedVisible = false;
       this._closing = true;
 
       this.onClose && this.onClose();
