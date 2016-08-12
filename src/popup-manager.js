@@ -8,13 +8,13 @@ const getModal = function() {
       event.preventDefault();
       event.stopPropagation();
     });
-
-    modalDom.addEventListener('click', function() {
-      PopupManager.doOnModalClick && PopupManager.doOnModalClick();
-    });
   }
 
   return modalDom;
+};
+
+const handleModalClick = function() {
+  PopupManager.doOnModalClick && PopupManager.doOnModalClick();
 };
 
 const instances = {};
@@ -68,6 +68,9 @@ const PopupManager = {
     }
 
     const modalDom = getModal();
+    setTimeout(() => {
+      modalDom.addEventListener('click', handleModalClick);
+    }, 300);
 
     modalDom.classList.add('v-modal');
     modalDom.classList.add('v-modal-enter');
@@ -126,6 +129,7 @@ const PopupManager = {
           if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
           modalDom.style.display = 'none';
         }
+        modalDom.removeEventListener('click', handleModalClick);
         modalDom.classList.remove('v-modal-leave');
       }, 200);
     }
