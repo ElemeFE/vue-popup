@@ -41,7 +41,8 @@ const hookTransition = (transition) => {
 
 const getDOM = function(dom) {
   if (dom.nodeType === 3) {
-    return dom.nextElementSibling;
+    dom =  dom.nextElementSibling || dom.nextSibling;
+    getDOM(dom);
   }
   return dom;
 };
