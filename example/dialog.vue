@@ -1,6 +1,5 @@
 <template>
   <div class="dialog"
-    v-if="rendered"
     v-show="visible"
     transition="dialog-fade">
     <div class="dialog-content">
