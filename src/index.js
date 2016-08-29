@@ -41,7 +41,7 @@ const hookTransition = (transition) => {
 
 const getDOM = function(dom) {
   if (dom.nodeType === 3) {
-    dom =  dom.nextElementSibling || dom.nextSibling;
+    dom = dom.nextElementSibling || dom.nextSibling;
     getDOM(dom);
   }
   return dom;
@@ -94,6 +94,7 @@ export default {
 
   data() {
     return {
+      opened: false,
       bodyOverflow: null,
       rendered: false
     };
@@ -147,6 +148,7 @@ export default {
 
     doOpen(props) {
       if (this.willOpen && !this.willOpen()) return;
+      if (this.opened) return;
 
       this._opening = true;
       this.$emit('input', true);
@@ -181,6 +183,7 @@ export default {
       } else if (zIndex) {
         dom.style.zIndex = zIndex;
       }
+      this.opened = true;
 
       this.onOpen && this.onOpen();
 
@@ -223,6 +226,7 @@ export default {
       if (this.modal) {
         document.body.style.overflow = this.bodyOverflow;
       }
+      this.opened = false;
 
       if (!this.transition) {
         this.doAfterClose();
