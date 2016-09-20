@@ -221,7 +221,7 @@ export default {
 
       this.onClose && this.onClose();
 
-      if (this.modal) {
+      if (this.modal && this.bodyOverflow !== 'hidden') {
         document.body.style.overflow = this.bodyOverflow;
       }
 
