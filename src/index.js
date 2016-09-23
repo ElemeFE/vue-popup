@@ -39,6 +39,30 @@ const hookTransition = (transition) => {
   });
 };
 
+let scrollBarWidth;
+const getScrollBarWidth = () => {
+  if (scrollBarWidth !== undefined) return scrollBarWidth;
+
+  const outer = document.createElement('div');
+  outer.style.visibility = 'hidden';
+  outer.style.width = '100px';
+  outer.style.position = 'absolute';
+  outer.style.top = '-9999px';
+  document.body.appendChild(outer);
+
+  const widthNoScroll = outer.offsetWidth;
+  outer.style.overflow = 'scroll';
+
+  const inner = document.createElement('div');
+  inner.style.width = '100%';
+  outer.appendChild(inner);
+
+  const widthWithScroll = inner.offsetWidth;
+  outer.parentNode.removeChild(outer);
+
+  return widthNoScroll - widthWithScroll;
+};
+
 const getDOM = function(dom) {
   if (dom.nodeType === 3) {
     dom = dom.nextElementSibling || dom.nextSibling;
@@ -63,6 +87,10 @@ export default {
     modal: {
       type: Boolean,
       default: false
+    },
+    modalFade: {
+      type: Boolean,
+      default: true
     },
     modalClass: {
     },
@@ -96,6 +124,7 @@ export default {
     return {
       opened: false,
       bodyOverflow: null,
+      bodyPaddingRight: null,
       rendered: false
     };
   },
@@ -167,9 +196,14 @@ export default {
           PopupManager.closeModal(this._popupId);
           this._closing = false;
         }
-        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), dom, props.modalClass);
+        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), dom, props.modalClass, props.modalFade);
         if (!this.bodyOverflow) {
+          this.bodyPaddingRight = document.body.style.paddingRight;
           this.bodyOverflow = document.body.style.overflow;
+        }
+        scrollBarWidth = getScrollBarWidth();
+        if (scrollBarWidth > 0) {
+          document.body.style.paddingRight = scrollBarWidth + 'px';
         }
         document.body.style.overflow = 'hidden';
       }
@@ -223,9 +257,14 @@ export default {
 
       this.onClose && this.onClose();
 
-      if (this.modal && this.bodyOverflow !== 'hidden') {
-        document.body.style.overflow = this.bodyOverflow;
-      }
+      setTimeout(() => {
+        if (this.modal && this.bodyOverflow !== 'hidden') {
+          document.body.style.overflow = this.bodyOverflow;
+          document.body.style.paddingRight = this.bodyPaddingRight;
+        }
+        this.bodyOverflow = null;
+        this.bodyPaddingRight = null;
+      }, 200);
       this.opened = false;
 
       if (!this.transition) {

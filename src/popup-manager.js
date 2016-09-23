@@ -22,6 +22,8 @@ const instances = {};
 const PopupManager = {
   zIndex: 1000,
 
+  modalFade: true,
+
   getInstance: function(id) {
     return instances[id];
   },
@@ -55,8 +57,9 @@ const PopupManager = {
     }
   },
 
-  openModal: function(id, zIndex, dom, modalClass) {
+  openModal: function(id, zIndex, dom, modalClass, modalFade) {
     if (!id || zIndex === undefined) return;
+    this.modalFade = modalFade;
 
     const modalStack = this.modalStack;
 
@@ -70,7 +73,9 @@ const PopupManager = {
     const modalDom = getModal();
 
     modalDom.classList.add('v-modal');
-    modalDom.classList.add('v-modal-enter');
+    if (this.modalFade) {
+      modalDom.classList.add('v-modal-enter');
+    }
     if (modalClass) {
       let classArr = modalClass.trim().split(/\s+/);
       classArr.forEach(item => modalDom.classList.add(item));
@@ -120,7 +125,9 @@ const PopupManager = {
     }
 
     if (modalStack.length === 0) {
-      modalDom.classList.add('v-modal-leave');
+      if (this.modalFade) {
+        modalDom.classList.add('v-modal-leave');
+      }
       setTimeout(() => {
         if (modalStack.length === 0) {
           if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
