@@ -94,6 +94,10 @@ export default {
     },
     modalClass: {
     },
+    lockScroll: {
+      type: Boolean,
+      default: true
+    },
     closeOnPressEscape: {
       type: Boolean,
       default: false
@@ -197,15 +201,17 @@ export default {
           this._closing = false;
         }
         PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), dom, props.modalClass, props.modalFade);
-        if (!this.bodyOverflow) {
-          this.bodyPaddingRight = document.body.style.paddingRight;
-          this.bodyOverflow = document.body.style.overflow;
+        if (props.lockScroll) {
+          if (!this.bodyOverflow) {
+            this.bodyPaddingRight = document.body.style.paddingRight;
+            this.bodyOverflow = document.body.style.overflow;
+          }
+          scrollBarWidth = getScrollBarWidth();
+          if (scrollBarWidth > 0) {
+            document.body.style.paddingRight = scrollBarWidth + 'px';
+          }
+          document.body.style.overflow = 'hidden';
         }
-        scrollBarWidth = getScrollBarWidth();
-        if (scrollBarWidth > 0) {
-          document.body.style.paddingRight = scrollBarWidth + 'px';
-        }
-        document.body.style.overflow = 'hidden';
       }
 
       if (getComputedStyle(dom).position === 'static') {
@@ -257,14 +263,17 @@ export default {
 
       this.onClose && this.onClose();
 
-      setTimeout(() => {
-        if (this.modal && this.bodyOverflow !== 'hidden') {
-          document.body.style.overflow = this.bodyOverflow;
-          document.body.style.paddingRight = this.bodyPaddingRight;
-        }
-        this.bodyOverflow = null;
-        this.bodyPaddingRight = null;
-      }, 200);
+      if (this.lockScroll) {
+        setTimeout(() => {
+          if (this.modal && this.bodyOverflow !== 'hidden') {
+            document.body.style.overflow = this.bodyOverflow;
+            document.body.style.paddingRight = this.bodyPaddingRight;
+          }
+          this.bodyOverflow = null;
+          this.bodyPaddingRight = null;
+        }, 200);
+      }
+
       this.opened = false;
 
       if (!this.transition) {
