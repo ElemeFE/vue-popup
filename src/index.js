@@ -65,6 +65,10 @@ export default {
       type: Boolean,
       default: false
     },
+    lockScroll: {
+      type: Boolean,
+      default: true
+    },
     modalClass: {
     },
     closeOnPressEscape: {
@@ -167,10 +171,12 @@ export default {
           this._closing = false;
         }
         PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), dom, props.modalClass);
-        if (!this.bodyOverflow) {
-          this.bodyOverflow = document.body.style.overflow;
+        if (props.lockScroll) {
+          if (!this.bodyOverflow) {
+            this.bodyOverflow = document.body.style.overflow;
+          }
+          document.body.style.overflow = 'hidden';
         }
-        document.body.style.overflow = 'hidden';
       }
 
       if (getComputedStyle(dom).position === 'static') {
@@ -221,8 +227,10 @@ export default {
 
       this.onClose && this.onClose();
 
-      if (this.modal && this.bodyOverflow !== 'hidden') {
-        document.body.style.overflow = this.bodyOverflow;
+      if (this.lockScroll) {
+        if (this.modal && this.bodyOverflow !== 'hidden') {
+          document.body.style.overflow = this.bodyOverflow;
+        }
       }
 
       if (!this.transition) {
