@@ -1,3 +1,5 @@
+import { addClass, removeClass } from 'wind-dom/src/class';
+
 const getModal = function() {
   let modalDom = PopupManager.modalDom;
   if (!modalDom) {
@@ -72,16 +74,16 @@ const PopupManager = {
 
     const modalDom = getModal();
 
-    modalDom.classList.add('v-modal');
+    addClass(modalDom, 'v-modal');
     if (this.modalFade) {
-      modalDom.classList.add('v-modal-enter');
+      addClass(modalDom, 'v-modal-enter');
     }
     if (modalClass) {
       let classArr = modalClass.trim().split(/\s+/);
-      classArr.forEach(item => modalDom.classList.add(item));
+      classArr.forEach(item => addClass(modalDom, item));
     }
     setTimeout(() => {
-      modalDom.classList.remove('v-modal-enter');
+      removeClass(modalDom, 'v-modal-enter');
     }, 200);
 
     if (dom && dom.parentNode && dom.parentNode.nodeType !== 11) {
@@ -107,7 +109,7 @@ const PopupManager = {
       if (topItem.id === id) {
         if (topItem.modalClass) {
           let classArr = topItem.modalClass.trim().split(/\s+/);
-          classArr.forEach(item => modalDom.classList.remove(item));
+          classArr.forEach(item => removeClass(modalDom, item));
         }
 
         modalStack.pop();
@@ -126,14 +128,14 @@ const PopupManager = {
 
     if (modalStack.length === 0) {
       if (this.modalFade) {
-        modalDom.classList.add('v-modal-leave');
+        addClass(modalDom, 'v-modal-leave');
       }
       setTimeout(() => {
         if (modalStack.length === 0) {
           if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
           modalDom.style.display = 'none';
         }
-        modalDom.classList.remove('v-modal-leave');
+        removeClass(modalDom, 'v-modal-leave');
       }, 200);
     }
   }

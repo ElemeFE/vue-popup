@@ -22,7 +22,9 @@
   },
   "author": "baiyaaaaa",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "wind-dom": "0.0.3"
+  },
   "devDependencies": {
     "gh-pages": "^0.11.0",
     "my-local-ip": "^1.0.0"
