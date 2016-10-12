@@ -287,3 +287,5 @@ export default {
     }
   }
 };
+
+export { PopupManager };
