@@ -207,7 +207,8 @@ export default {
             this.bodyOverflow = document.body.style.overflow;
           }
           scrollBarWidth = getScrollBarWidth();
-          if (scrollBarWidth > 0) {
+          let bodyHasOverflow = document.body.clientHeight < document.body.scrollHeight;
+          if (scrollBarWidth > 0 && bodyHasOverflow) {
             document.body.style.paddingRight = scrollBarWidth + 'px';
           }
           document.body.style.overflow = 'hidden';
