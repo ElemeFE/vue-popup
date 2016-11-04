@@ -13,7 +13,7 @@ cooking.set({
   format: 'umd',
   moduleName: 'VuePopup',
   extractCSS: 'popup.css',
-  extends: ['vue', 'lint']
+  extends: ['vue2', 'lint']
 });
 
 cooking.add('externals.vue', 'vue');
