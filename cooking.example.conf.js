@@ -16,7 +16,7 @@ cooking.set({
     log: false
   },
 
-  extends: ['vue', 'lint']
+  extends: ['vue2', 'lint']
 });
 
 cooking.add('externals.vue', 'Vue');
