@@ -22,7 +22,7 @@ const getModal = function() {
 const instances = {};
 
 const PopupManager = {
-  zIndex: 1000,
+  zIndex: 2000,
 
   modalFade: true,
 
