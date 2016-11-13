@@ -156,8 +156,6 @@ export default {
       if (!this.rendered) {
         this.rendered = true;
         this.$emit('input', true);
-
-        return;
       }
 
       const props = merge({}, this, options);
@@ -184,6 +182,10 @@ export default {
       if (this.opened) return;
 
       this._opening = true;
+
+      // 使用 vue-popup 的组件，如果需要和父组件通信显示的状态，应该使用 value，它是一个 prop，
+      // 这样在父组件中用 v-model 即可；否则可以使用 visible，它是一个 data
+      this.visible = true;
       this.$emit('input', true);
 
       const dom = getDOM(this.$el);
@@ -259,6 +261,7 @@ export default {
     },
 
     doClose() {
+      this.visible = false;
       this.$emit('input', false);
       this._closing = true;
 
