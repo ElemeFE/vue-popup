@@ -1,8 +1,13 @@
 import { addClass, removeClass } from 'wind-dom/src/class';
 
+let hasModal = false;
+
 const getModal = function() {
   let modalDom = PopupManager.modalDom;
-  if (!modalDom) {
+  if (modalDom) {
+    hasModal = true;
+  } else {
+    hasModal = false;
     modalDom = document.createElement('div');
     PopupManager.modalDom = modalDom;
 
@@ -75,7 +80,7 @@ const PopupManager = {
     const modalDom = getModal();
 
     addClass(modalDom, 'v-modal');
-    if (this.modalFade) {
+    if (this.modalFade && !hasModal) {
       addClass(modalDom, 'v-modal-enter');
     }
     if (modalClass) {
@@ -134,6 +139,7 @@ const PopupManager = {
         if (modalStack.length === 0) {
           if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
           modalDom.style.display = 'none';
+          PopupManager.modalDom = undefined;
         }
         removeClass(modalDom, 'v-modal-leave');
       }, 200);

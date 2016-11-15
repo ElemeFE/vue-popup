@@ -122,6 +122,12 @@ export default {
   beforeDestroy() {
     PopupManager.deregister(this._popupId);
     PopupManager.closeModal(this._popupId);
+    if (this.modal && this.bodyOverflow !== null && this.bodyOverflow !== 'hidden') {
+      document.body.style.overflow = this.bodyOverflow;
+      document.body.style.paddingRight = this.bodyPaddingRight;
+    }
+    this.bodyOverflow = null;
+    this.bodyPaddingRight = null;
   },
 
   data() {
@@ -209,7 +215,7 @@ export default {
             this.bodyOverflow = document.body.style.overflow;
           }
           scrollBarWidth = getScrollBarWidth();
-          let bodyHasOverflow = document.body.clientHeight < document.body.scrollHeight;
+          let bodyHasOverflow = document.documentElement.clientHeight < document.body.scrollHeight;
           if (scrollBarWidth > 0 && bodyHasOverflow) {
             document.body.style.paddingRight = scrollBarWidth + 'px';
           }
