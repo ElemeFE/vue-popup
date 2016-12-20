@@ -1,8 +1,10 @@
+import Vue from 'vue';
 import { addClass, removeClass } from 'wind-dom/src/class';
 
 let hasModal = false;
 
 const getModal = function() {
+  if (Vue.prototype.$isServer) return;
   let modalDom = PopupManager.modalDom;
   if (modalDom) {
     hasModal = true;
@@ -65,6 +67,7 @@ const PopupManager = {
   },
 
   openModal: function(id, zIndex, dom, modalClass, modalFade) {
+    if (Vue.prototype.$isServer) return;
     if (!id || zIndex === undefined) return;
     this.modalFade = modalFade;
 
@@ -146,7 +149,7 @@ const PopupManager = {
     }
   }
 };
-window.addEventListener('keydown', function(event) {
+!Vue.prototype.$isServer && window.addEventListener('keydown', function(event) {
   if (event.keyCode === 27) { // ESC
     if (PopupManager.modalStack.length > 0) {
       const topItem = PopupManager.modalStack[PopupManager.modalStack.length - 1];
