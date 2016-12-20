@@ -227,11 +227,7 @@ export default {
         dom.style.position = 'absolute';
       }
 
-      if (modal) {
-        dom.style.zIndex = PopupManager.nextZIndex();
-      } else if (zIndex) {
-        dom.style.zIndex = zIndex;
-      }
+      dom.style.zIndex = PopupManager.nextZIndex();
       this.opened = true;
 
       this.onOpen && this.onOpen();
