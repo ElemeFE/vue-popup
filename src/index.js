@@ -41,6 +41,7 @@ const hookTransition = (transition) => {
 
 let scrollBarWidth;
 const getScrollBarWidth = () => {
+  if (Vue.prototype.$isServer) return;
   if (scrollBarWidth !== undefined) return scrollBarWidth;
 
   const outer = document.createElement('div');
@@ -184,6 +185,7 @@ export default {
     },
 
     doOpen(props) {
+      if (this.$isServer) return;
       if (this.willOpen && !this.willOpen()) return;
       if (this.opened) return;
 
