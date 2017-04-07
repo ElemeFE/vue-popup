@@ -28,6 +28,7 @@ const PopupManager = {
 
   register: function(id, instance) {
     if (id && instance) {
+      instance.zIndex && (this.zIndex = instance.zIndex)
       instances[id] = instance;
     }
   },
